@@ -53,6 +53,8 @@ module.exports.Signup = async (req, res) => {
   res.cookie("token", token, {
     httpOnly: true,
     maxAge: 3 * 24 * 60 * 60 * 1000,
+    sameSite: "None",
+    secure: process.env.NODE_ENV === "production",
   });
 
   await sendVerificationEmail(user.email, user.username, verificationToken);
@@ -92,6 +94,8 @@ module.exports.Login = async (req, res) => {
   res.cookie("token", token, {
     httpOnly: true,
     maxAge: 3 * 24 * 60 * 60 * 1000,
+    sameSite: "None",
+    secure: process.env.NODE_ENV === "production",
   });
   res.status(StatusCodes.OK).json({
     message: "User logged in successfully",
