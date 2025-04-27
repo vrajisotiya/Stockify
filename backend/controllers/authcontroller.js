@@ -51,7 +51,6 @@ module.exports.Signup = async (req, res) => {
   const token = createSecretToken(user._id);
 
   res.cookie("token", token, {
-    withCredentials: true,
     httpOnly: true,
     maxAge: 3 * 24 * 60 * 60 * 1000,
   });
@@ -61,7 +60,10 @@ module.exports.Signup = async (req, res) => {
   res.status(StatusCodes.CREATED).json({
     message: "User signed in successfully",
     success: true,
-    user: user.username,
+    user: {
+      username: user.username,
+      isVerified: user.isVerified,
+    },
   });
 };
 
@@ -88,7 +90,6 @@ module.exports.Login = async (req, res) => {
   }
   const token = createSecretToken(user._id);
   res.cookie("token", token, {
-    withCredentials: true,
     httpOnly: true,
     maxAge: 3 * 24 * 60 * 60 * 1000,
   });
