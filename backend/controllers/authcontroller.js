@@ -110,6 +110,8 @@ module.exports.Login = async (req, res) => {
 module.exports.Logout = async (req, res, next) => {
   res.clearCookie("token", {
     httpOnly: true,
+    sameSite: "None",
+    secure: process.env.NODE_ENV === "production",
   });
   res
     .status(StatusCodes.OK)
