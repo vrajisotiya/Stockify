@@ -63,9 +63,10 @@ const EmailVerification = () => {
   // Auto submit when all fields are filled
   useEffect(() => {
     if (code.every((digit) => digit !== "")) {
-      handleSubmit(new Event("submit"));
+      const verificationCode = code.join("");
+      dispatch(verifyEmailCode(verificationCode));
     }
-  }, [code]);
+  }, [code, dispatch]);
 
   return (
     <div className="flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 py-8 min-h-screen">
