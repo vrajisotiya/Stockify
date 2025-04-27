@@ -6,10 +6,16 @@ export const checkAuthStatus = createAsyncThunk(
   "auth/checkAuthStatus",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await axios.post(`${API_URL}/api/auth/check-auth`);
-
-      if (res.data.user.isVerified) {
-        return res.data.user;
+      const res = await axios.post(
+        `${API_URL}/api/auth/check-auth`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      const user = res.data.user;
+      if (user && user.isVerified) {
+        return user;
       } else {
         return rejectWithValue("Not verified");
       }
@@ -75,9 +81,13 @@ export const logoutUser = createAsyncThunk(
   "auth/logoutUser",
   async (_, { rejectWithValue }) => {
     try {
-      await axios.post(`${API_URL}/api/auth/logout`, {
-        withCredentials: true,
-      });
+      await axios.post(
+        `${API_URL}/api/auth/logout`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
       return;
     } catch (err) {
       return rejectWithValue("Logout failed");
@@ -130,9 +140,12 @@ export const resetPassword = createAsyncThunk(
   "auth/resetPassword",
   async ({ token, password }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post(`/api/auth/reset-password/${token}`, {
-        password,
-      });
+      const { data } = await axios.post(
+        `${API_URL}/api/auth/reset-password/${token}`,
+        {
+          password,
+        }
+      );
       return data.message || "Password reset successful.";
     } catch (error) {
       return rejectWithValue(
