@@ -41,7 +41,9 @@ export default function Stocklist() {
   useEffect(() => {
     const fetchStockList = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/stocklist`);
+        const response = await axios.get(`${API_URL}/api/stocklist`, {
+          withCredentials: true,
+        });
         setStockData(response.data.data);
       } catch (err) {
         console.error("Error fetching stock list:", err);
@@ -135,11 +137,17 @@ export default function Stocklist() {
         orderType === "buy"
           ? `${API_URL}/api/order/buy`
           : `${API_URL}/api/order/sell`;
-      const response = await axios.post(endpoint, {
-        name: selectedStock.symbol,
-        quantity: validqty,
-        price: validprice,
-      });
+      const response = await axios.post(
+        endpoint,
+        {
+          name: selectedStock.symbol,
+          quantity: validqty,
+          price: validprice,
+        },
+        {
+          withCredentials: true,
+        }
+      );
 
       if (response.status === 200) {
         setOrderStatus({
