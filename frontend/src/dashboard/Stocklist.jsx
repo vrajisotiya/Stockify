@@ -46,7 +46,6 @@ export default function Stocklist() {
         });
         setStockData(response.data.data);
       } catch (err) {
-        console.error("Error fetching stock list:", err);
         setError("Failed to load stock list.");
       }
     };

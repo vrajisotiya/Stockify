@@ -27,7 +27,6 @@ export default function Fund() {
       setFund(data);
       setError(null);
     } catch (err) {
-      console.error("Error fetching fund data:", err);
       setError("Failed to load fund data");
     } finally {
       setLoading(false);
@@ -55,7 +54,6 @@ export default function Fund() {
       setShowAddModal(false);
       fetchFundData();
     } catch (err) {
-      console.error("Error adding funds:", err);
       alert("Failed to add funds. Please try again.");
     }
   };
@@ -86,7 +84,6 @@ export default function Fund() {
       setShowWithdrawModal(false);
       fetchFundData();
     } catch (err) {
-      console.error("Error withdrawing funds:", err);
       alert("Failed to withdraw funds. Please try again.");
     }
   };

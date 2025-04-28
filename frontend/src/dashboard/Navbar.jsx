@@ -25,7 +25,7 @@ export default function Navbar() {
       dispatch(logoutAction());
       toast.success("Logged out successfully");
     } catch (err) {
-      console.error("Logout failed", err);
+      alert("Failed to logout");
     }
   };
 

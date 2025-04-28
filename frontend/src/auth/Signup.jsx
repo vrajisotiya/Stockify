@@ -86,7 +86,7 @@ const Signup = () => {
       dispatch(signupUser(formData));
       navigate("/verify-email");
     } catch (error) {
-      console.log(error);
+      alert("Failed to sign up");
     }
   };
 

@@ -56,7 +56,6 @@ export default function Holding() {
 
         setHoldings(formattedHoldings);
       } catch (error) {
-        console.error("Error fetching holdings:", error);
         setError("Failed to load holdings. Please try again later.");
       } finally {
         setIsLoading(false);

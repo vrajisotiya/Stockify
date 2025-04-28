@@ -52,8 +52,7 @@ export default function Order() {
         setOrders(formattedOrders);
         setError(false);
       } catch (err) {
-        console.error("Error fetching orders:", err);
-        setError("Failed to load orders. Please try again later.");
+        setError(err.response.data.message || "Failed to load orders.");
       } finally {
         setLoading(false);
       }

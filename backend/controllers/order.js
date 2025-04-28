@@ -185,13 +185,11 @@ module.exports.sell = async (req, res) => {
     }
   } catch (error) {
     await session.abortTransaction();
-    res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({
-        success: false,
-        message: "Transaction failed",
-        error: error.message,
-      });
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "Transaction failed",
+      error: error.message,
+    });
   } finally {
     session.endSession();
   }
@@ -213,7 +211,7 @@ module.exports.orders = async (req, res) => {
     if (!orders.length) {
       return res.status(StatusCodes.NOT_FOUND).json({
         data: [],
-        message: "No orders found for this user.",
+        message: "No orders found .",
       });
     }
 
