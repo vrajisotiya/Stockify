@@ -28,11 +28,11 @@ export default function Navbar() {
       dispatch(logoutAction());
       toast.success("Logged out successfully");
     } catch (err) {
-      alert("Failed to logout");
+      toast.error("Failed to logout");
     }
   };
 
-  const navLinkClass = "relative px-2 py-1 cursor-pointer hover:text-blue-600 ";
+  const navLinkClass = "relative px-2 py-1 cursor-pointer hover:text-blue-600";
 
   return (
     <header className="bg-white border-b-2 border-gray-100 sticky top-0 z-50">
@@ -66,7 +66,9 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center space-x-4 ml-6">
-          {loading ? null : !user ? (
+          {loading ? (
+            <span>Loading...</span>
+          ) : !user ? (
             <>
               <NavLink to="/login">
                 <button className="px-4 py-2 text-sm font-medium text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50 transition">
@@ -110,6 +112,7 @@ export default function Navbar() {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 rounded-md hover:bg-gray-100 transition"
+            aria-label="Toggle mobile menu"
           >
             <Menu className="w-6 h-6 text-gray-600" />
           </button>
@@ -135,7 +138,9 @@ export default function Navbar() {
               ))}
 
               <div className="flex flex-col mt-4 pt-4 space-y-3">
-                {loading ? null : !user ? (
+                {loading ? (
+                  <span>Loading...</span>
+                ) : !user ? (
                   <>
                     <NavLink to="/login">
                       <button className="w-fit px-4 py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50 transition">
