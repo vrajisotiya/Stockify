@@ -55,6 +55,10 @@ app.use("/api/holding", holding);
 app.use("/api/fund", fund);
 app.use("/api/stocklist", stocklist);
 
+app.get("/", (req, res) => {
+  res.send("it is stockify backend");
+});
+
 app.use((err, req, res, next) => {
   let { statusCode = 400, message = "Something went Wrong!" } = err;
   res.status(statusCode).send({ message });
