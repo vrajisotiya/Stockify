@@ -83,7 +83,7 @@ To run this project, you will need to add the following environment variables to
 ## Installation
 
 ```bash
-git clone https://github.com/vrajisotiya/stockify.git
+git clone https://github.com/vrajisotiya/Stockify.git
 cd stockify
 ```
 
