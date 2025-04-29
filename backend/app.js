@@ -47,8 +47,10 @@ app.get("/api/cron", async (req, res) => {
     await updateStockPrices();
     await processPendingOrders();
     await deleteOldOrders();
+    return res.status(200).send("Cron jobs executed successfully");
   } catch (error) {
     console.error("Error running scheduled jobs: ", error);
+    return res.status(500).send("Error executing cron jobs");
   }
 });
 
