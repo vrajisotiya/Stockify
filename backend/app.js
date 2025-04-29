@@ -4,7 +4,6 @@ const app = express();
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const { CronJob } = require("cron");
 const authRoute = require("./routes/authroute");
 const order = require("./routes/order");
 const holding = require("./routes/holding");
@@ -39,7 +38,11 @@ main()
     console.log("Error to connect to DB ", err);
   });
 
-const job = new CronJob("0 0 * * *", async () => {
+app.get("/api/cron", async (req, res) => {
+  const { key } = req.query;
+  if (key !== process.env.CRON_SECRET_KEY) {
+    return res.status(403).send("Unauthorized");
+  }
   try {
     await updateStockPrices();
     await processPendingOrders();
